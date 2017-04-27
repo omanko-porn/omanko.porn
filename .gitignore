@@ -1,0 +1,6 @@
+# directories
+/data/
+/public/
+
+# files
+/.env.production
