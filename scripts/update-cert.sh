@@ -1,9 +1,12 @@
 #!/bin/sh
 
+cd $(dirname $0)/..
+
 docker run \
   --rm \
   -v /etc/letsencrypt:/etc/letsencrypt \
   -v /var/log/letsencrypt:/var/log/letsencrypt \
+  -v $(pwd)/public:/usr/share/nginx/html \
   certbot/certbot \
   certonly \
   --webroot \
