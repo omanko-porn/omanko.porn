@@ -39,6 +39,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "10080:10080"
     depends_on:
       - web
       - streaming
