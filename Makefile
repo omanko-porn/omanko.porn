@@ -12,4 +12,4 @@ reload:
 test: build
 	docker-compose run --rm nginx nginx -t
 
-.PHONY: all build test
+.PHONY: all pull build reload test
