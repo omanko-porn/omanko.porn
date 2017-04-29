@@ -6,6 +6,9 @@ pull:
 build: pull
 	docker-compose build
 
+reload:
+	docker-compose kill -s HUP nginx
+
 test: build
 	docker-compose run --rm nginx nginx -t
 
