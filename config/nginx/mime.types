@@ -8,5 +8,6 @@ types {
   image/jpeg                    jpeg jpg;
   image/png                     png;
   image/svg+xml                 svg;
+  image/vnd.microsoft.icon      ico;
   text/css                      css;
 }
