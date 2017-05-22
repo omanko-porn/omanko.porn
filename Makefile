@@ -10,7 +10,7 @@ reload:
 	docker-compose kill -s HUP nginx
 
 update:
-	docker pull gargron/mastodon:latest
+	docker pull gargron/mastodon:v1.4rc3
 	docker run \
 		--env-file .env.production \
 		--rm \
