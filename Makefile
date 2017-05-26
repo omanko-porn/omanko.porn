@@ -10,13 +10,13 @@ reload:
 	docker-compose kill -s HUP nginx
 
 update:
-	docker pull gargron/mastodon:v1.4rc3
+	docker pull gargron/mastodon:v1.4rc4
 	docker run \
 		--env-file .env.production \
 		--rm \
 		-v $(shell pwd)/public/assets:/mastodon/public/assets \
 		-v $(shell pwd)/public/packs:/mastodon/public/packs \
-		gargron/mastodon:latest rails assets:precompile
+		gargron/mastodon:v1.4rc4 rails assets:precompile
 	docker-compose stop web streaming sidekiq
 	docker-compose rm -f -v web streaming sidekiq
 	docker-compose run --rm web rails db:migrate
