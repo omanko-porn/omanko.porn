@@ -10,7 +10,7 @@ services:
       - ./data/redis:/data
   web:
     restart: always
-    image: gargron/mastodon:v1.4.2
+    image: gargron/mastodon:v1.4.3
     env_file: .env.production
     command: ./bin/rails s -p 3000
     depends_on:
@@ -21,7 +21,7 @@ services:
       - ./public/packs:/mastodon/public/packs
   streaming:
     restart: always
-    image: gargron/mastodon:v1.4.2
+    image: gargron/mastodon:v1.4.3
     env_file: .env.production
     command: yarn start
     depends_on:
@@ -29,7 +29,7 @@ services:
       - redis
   sidekiq:
     restart: always
-    image: gargron/mastodon:v1.4.2
+    image: gargron/mastodon:v1.4.3
     env_file: .env.production
     command: ./bin/bundle exec sidekiq
     depends_on:
