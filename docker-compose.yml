@@ -45,6 +45,6 @@ services:
       - web
       - streaming
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./data/letsencrypt:/etc/letsencrypt:ro
       - ./config/nginx:/etc/nginx:ro
       - ./public:/usr/share/nginx/html:ro
