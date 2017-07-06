@@ -8,9 +8,9 @@ services:
     image: redis:alpine
     volumes:
       - ./data/redis:/data
-  web:
+  web: &mastodon
     restart: always
-    image: gargron/mastodon:v1.4.7
+    image: ${MASTODON_IMAGE:-gargron/mastodon:v1.4.7}
     env_file: .env.production
     command: ./bin/rails s -p 3000
     depends_on:
@@ -20,21 +20,11 @@ services:
       - ./public/assets:/mastodon/public/assets
       - ./public/packs:/mastodon/public/packs
   streaming:
-    restart: always
-    image: gargron/mastodon:v1.4.7
-    env_file: .env.production
+    <<: *mastodon
     command: yarn start
-    depends_on:
-      - db
-      - redis
   sidekiq:
-    restart: always
-    image: gargron/mastodon:v1.4.7
-    env_file: .env.production
+    <<: *mastodon
     command: ./bin/bundle exec sidekiq
-    depends_on:
-      - db
-      - redis
   nginx:
     image: nginx:alpine
     ports:
