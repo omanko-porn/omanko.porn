@@ -1,6 +1,8 @@
 # directories
 /data/
-/public/
+/public/assets
+/public/packs
+/public/system
 
 # files
 /.env.production
