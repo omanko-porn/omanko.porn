@@ -1,4 +1,4 @@
-MASTODON_IMAGE ?= gargron/mastodon:v1.4.7
+MASTODON_IMAGE ?= gargron/mastodon:latest
 
 all: build
 

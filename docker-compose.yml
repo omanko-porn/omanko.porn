@@ -10,7 +10,7 @@ services:
       - ./data/redis:/data
   web: &mastodon
     restart: always
-    image: ${MASTODON_IMAGE:-gargron/mastodon:v1.4.7}
+    image: ${MASTODON_IMAGE:-gargron/mastodon:latest}
     env_file: .env.production
     command: ./bin/rails s -p 3000
     depends_on:
