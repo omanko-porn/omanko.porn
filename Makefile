@@ -8,6 +8,10 @@ pull:
 build: pull
 	docker-compose build
 
+start: build
+	docker-compose up -d
+	docker-compose scale sidekiq=3
+
 reload:
 	docker-compose kill -s HUP nginx
 
