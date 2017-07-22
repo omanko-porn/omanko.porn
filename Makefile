@@ -3,7 +3,7 @@ MASTODON_IMAGE ?= gargron/mastodon:latest
 all: build
 
 pull:
-	docker-compose pull
+	docker pull $(MASTODON_IMAGE)
 
 build: pull
 	docker-compose build
@@ -15,8 +15,7 @@ start: build
 reload:
 	docker-compose kill -s HUP nginx
 
-update:
-	docker pull $(MASTODON_IMAGE)
+assets: build
 	touch public/sw.js
 	docker run \
 		--env-file .env.production \
@@ -25,14 +24,16 @@ update:
 		-v $(shell pwd)/public/assets:/mastodon/public/assets \
 		-v $(shell pwd)/public/packs:/mastodon/public/packs \
 		$(MASTODON_IMAGE) rails assets:precompile
+
+update: assets
 	docker-compose stop web streaming sidekiq
 	docker-compose rm -f -v web streaming sidekiq
 	docker-compose run --rm web rails db:migrate
 	docker-compose up -d web streaming sidekiq
 	docker-compose scale sidekiq=3
-	docker-compose kill -s HUP nginx
+	make reload
 
 test:
 	docker-compose run --rm nginx nginx -t
 
-.PHONY: all pull build reload update test
+.PHONY: all pull build reload assets update test
