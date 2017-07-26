@@ -32,6 +32,7 @@ update: assets
 	docker-compose up -d web streaming sidekiq
 	docker-compose scale sidekiq=3
 	make reload
+	docker system prune -af
 
 test:
 	docker-compose run --rm nginx nginx -t
