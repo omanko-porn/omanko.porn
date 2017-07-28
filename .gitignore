@@ -5,5 +5,4 @@
 /public/system
 
 # files
-/public/sw.js
 /.env.production

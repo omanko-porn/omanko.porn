@@ -16,11 +16,9 @@ reload:
 	docker-compose kill -s HUP nginx
 
 assets: build
-	touch public/sw.js
 	docker run \
 		--env-file .env.production \
 		--rm \
-		-v $(shell pwd)/public/sw.js:/mastodon/public/sw.js \
 		-v $(shell pwd)/public/assets:/mastodon/public/assets \
 		-v $(shell pwd)/public/packs:/mastodon/public/packs \
 		$(MASTODON_IMAGE) rails assets:precompile
