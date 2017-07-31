@@ -1,4 +1,5 @@
 types {
+  application/json              json;
   application/javascript        js;
   application/vnd.ms-fontobject eot;
   audio/mpeg                    mp3;
