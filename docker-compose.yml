@@ -25,11 +25,9 @@ services:
   sidekiq:
     <<: *mastodon
     command: ./bin/bundle exec sidekiq
-  nginx:
+  cache:
     image: nginx:alpine
     ports:
-      - "80:80"
-      - "443:443"
       - "127.0.0.1:10080:10080"
     depends_on:
       - web
@@ -38,3 +36,16 @@ services:
       - ./data/letsencrypt:/etc/letsencrypt:ro
       - ./config/nginx:/etc/nginx:ro
       - ./public:/usr/share/nginx/html:ro
+  front:
+    image: ykzts/h2o:2.2.2
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+      - streaming
+      - cache
+    volumes:
+      - ./data/letsencrypt:/etc/letsencrypt:ro
+      - ./config/h2o:/etc/h2o:ro
+      - ./public:/var/www/html:ro
