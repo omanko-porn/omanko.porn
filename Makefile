@@ -9,8 +9,7 @@ build: pull
 	docker-compose build
 
 start: build
-	docker-compose up -d
-	docker-compose scale sidekiq=3
+	docker-compose up -d --scale sidekiq=3
 
 reload:
 	docker-compose kill -s HUP cache
@@ -28,8 +27,7 @@ update: assets
 	docker-compose stop web streaming sidekiq
 	docker-compose rm -f -v web streaming sidekiq
 	docker-compose run --rm web rails db:migrate
-	docker-compose up -d web streaming sidekiq
-	docker-compose scale sidekiq=3
+	docker-compose up -d --scale sidekiq=3 web streaming sidekiq
 	make reload
 	docker system prune -af
 
