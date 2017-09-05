@@ -15,4 +15,4 @@ docker run \
   --webroot-path /usr/share/nginx/html \
   --email ykzts@desire.sh \
   --cert-name omanko.porn \
-  --domains assets.omanko.porn,files.omanko.porn,omanko.porn,www.omanko.porn
+  --domains omanko.porn,assets.omanko.porn,files.omanko.porn,www.omanko.porn
