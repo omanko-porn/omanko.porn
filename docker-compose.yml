@@ -37,7 +37,7 @@ services:
       - ./config/nginx:/etc/nginx:ro
       - ./public:/usr/share/nginx/html:ro
   front:
-    image: ykzts/h2o:2.2.2
+    image: ykzts/h2o:edge
     ports:
       - "80:80"
       - "443:443"
