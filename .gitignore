@@ -1,8 +1,9 @@
 # directories
+/config/minio/
 /data/
-/public/assets
-/public/packs
-/public/system
+/public/assets/
+/public/packs/
+/public/system/
 
 # files
 /.env.datadog
