@@ -15,6 +15,14 @@ services:
     image: redis:alpine
     volumes:
       - ./data/redis:/data
+  storage:
+    image: minio/minio:latest
+    ports:
+      - "127.0.0.1:9000:9000"
+    command: server /export
+    volumes:
+      - ./data/minio:/export
+      - ./config/minio:/root/.minio
   web: &mastodon
     restart: always
     image: ${MASTODON_IMAGE:-gargron/mastodon:latest}
@@ -23,6 +31,7 @@ services:
     depends_on:
       - db
       - redis
+      - storage
     volumes:
       - ./public/assets:/mastodon/public/assets
       - ./public/packs:/mastodon/public/packs
@@ -38,12 +47,9 @@ services:
     ports:
       - "127.0.0.1:10080:10080"
     depends_on:
-      - web
-      - streaming
+      - storage
     volumes:
-      - ./data/letsencrypt:/etc/letsencrypt:ro
       - ./config/nginx:/etc/nginx:ro
-      - ./public:/usr/share/nginx/html:ro
   front:
     image: ykzts/h2o:2.2.3
     ports:
