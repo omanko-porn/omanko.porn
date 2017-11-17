@@ -51,7 +51,7 @@ services:
     volumes:
       - ./config/nginx:/etc/nginx:ro
   front:
-    image: ykzts/h2o:edge
+    image: ykzts/h2o:2.2.3p1
     ports:
       - "80:80"
       - "443:443"
