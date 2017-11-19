@@ -26,7 +26,7 @@ class Manifest
     return {} unless accepts.include?('text/html')
 
     path = env['PATH_INFO']
-    return {} if path.nil? %r{\A/(?:\z|(?:about|terms|users|web|@[^/]+)/?)} !~ path
+    return {} if path.nil? || %r{\A/(?:\z|(?:about|terms|users|web|@[^/]+)/?)} !~ path
 
     push_paths = @manifest.select { |name, _| DEFAULT_ASSETS.include?(name) }.values
 
