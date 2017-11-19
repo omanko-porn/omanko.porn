@@ -1,7 +1,12 @@
 class Manifest
-  ASSETS = {
-    'common.css' => 'style',
-    'common.js' => 'script',
+  DEFAULT_ASSETS = %w(
+    common.css
+    common.js
+  ).freeze
+
+  ASSET_TYPES = {
+    '.css' => 'style',
+    '.js' => 'script',
   }.freeze
 
   def initialize(path)
@@ -20,11 +25,28 @@ class Manifest
     accepts = env['HTTP_ACCEPT']&.split(/,\s*/) || []
     return {} unless accepts.include?('text/html')
 
-    path = env['PATH_INFO'] || '/'
-    return {} unless path =~ %r{\A/(?:(?:about|terms|users|web|@[^/]+)/?|\z)}
+    path = env['PATH_INFO']
+    return {} if path.nil? %r{\A/(?:\z|(?:about|terms|users|web|@[^/]+)/?)} !~ path
 
-    push_paths = @manifest.select { |name, _| ASSETS.has_key?(name) }
-    { 'link' => push_paths.map { |name, path| "<#{path}>; rel=preload; as=#{ASSETS[name]}" }.join("\n") }
+    push_paths = @manifest.select { |name, _| DEFAULT_ASSETS.include?(name) }.values
+
+    if %r{\A/about/?\z} =~ path
+      push_paths << @manifest['about.js']
+    end
+
+    if %r{\A/(?:about/more|(?:terms|users|@[^/]+))(?:/|\z)} =~ path
+      push_paths << @manifest['public.js']
+    end
+
+    if %r{\A/(?:\z|web/)} =~ path
+      push_paths << @manifest['application.js']
+      push_paths << @manifest['features/getting_started.js']
+      push_paths << @manifest['features/compose.js']
+      push_paths << @manifest['features/home_timeline.js']
+      push_paths << @manifest['features/notifications.js']
+    end
+
+    { 'link' => push_paths.map { |path| "<#{path}>; rel=preload; as=#{ASSET_TYPES[File.extname(path)]}" }.join("\n") }
   end
 end
 
