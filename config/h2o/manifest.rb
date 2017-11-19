@@ -5,8 +5,11 @@ class Manifest
   ).freeze
 
   ASSET_TYPES = {
+    '' => 'fetch',
     '.css' => 'style',
+    '.svg' => 'image',
     '.js' => 'script',
+    '.png' => 'image',
   }.freeze
 
   def initialize(path)
@@ -32,6 +35,9 @@ class Manifest
 
     if %r{\A/about/?\z} =~ path
       push_paths << @manifest['about.js']
+      push_paths << @manifest['elephant-fren.png']
+      push_paths << @manifest['logo_full.svg']
+      push_paths << '/api/v1/timelines/public'
     end
 
     if %r{\A/(?:about/more|(?:terms|users|@[^/]+))(?:/|\z)} =~ path
@@ -44,6 +50,8 @@ class Manifest
       push_paths << @manifest['features/compose.js']
       push_paths << @manifest['features/home_timeline.js']
       push_paths << @manifest['features/notifications.js']
+      push_paths << @manifest['mastodon-getting-started.png']
+      push_paths << '/api/v1/timelines/public'
     end
 
     { 'link' => push_paths.map { |path| "<#{path}>; rel=preload; as=#{ASSET_TYPES[File.extname(path)]}" }.join("\n") }
