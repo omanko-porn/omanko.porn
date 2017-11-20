@@ -51,7 +51,6 @@ class Manifest
       push_paths << @manifest['features/home_timeline.js']
       push_paths << @manifest['features/notifications.js']
       push_paths << @manifest['mastodon-getting-started.png']
-      push_paths << '/api/v1/timelines/public'
     end
 
     { 'link' => push_paths.map { |path| "<#{path}>; rel=preload; as=#{ASSET_TYPES[File.extname(path)]}" }.join("\n") }
