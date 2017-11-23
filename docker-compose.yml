@@ -45,8 +45,6 @@ services:
   webp-proxy:
     image: ykzts/webp-proxy:edge
     command: go-wrapper run -port 8080 -upstream-url http://storage:9000
-    ports:
-      - "127.0.0.1:10000:8080"
     depends_on:
       - storage
   cache:
