@@ -42,12 +42,19 @@ services:
   sidekiq:
     <<: *mastodon
     command: ./bin/bundle exec sidekiq
+  webp-proxy:
+    image: ykzts/webp-proxy:edge
+    command: go-wrapper run -port 8080 -upstream-url http://storage:9000
+    ports:
+      - "127.0.0.1:10000:8080"
+    depends_on:
+      - storage
   cache:
     image: nginx:alpine
     ports:
       - "127.0.0.1:10080:10080"
     depends_on:
-      - storage
+      - webp-proxy
     volumes:
       - ./config/nginx:/etc/nginx:ro
   front:
