@@ -12,7 +12,6 @@ start: build
 	docker-compose up -d --scale sidekiq=3
 
 reload:
-	docker-compose kill -s HUP cache
 	docker-compose restart front
 
 assets: build
@@ -25,7 +24,6 @@ update: assets
 	docker system prune -af
 
 test:
-	docker-compose run --rm cache nginx -t
 	docker-compose run --rm front h2o -c /etc/h2o/h2o.conf -t
 
 .PHONY: all pull build reload assets update test
