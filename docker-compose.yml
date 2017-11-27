@@ -19,9 +19,10 @@ services:
     depends_on:
       - redis
     volumes:
+      - ./config/mastodon/initializers/deflater.rb:/mastodon/config/initializers/deflater.rb
+      - ./data/mastodon/cache:/mastodon/tmp/cache
       - ./public/assets:/mastodon/public/assets
       - ./public/packs:/mastodon/public/packs
-      - ./config/mastodon/initializers/deflater.rb:/mastodon/config/initializers/deflater.rb
   streaming:
     <<: *mastodon
     command: yarn start
