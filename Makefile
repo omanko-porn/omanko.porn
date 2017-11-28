@@ -9,7 +9,7 @@ build: pull
 	docker-compose build
 
 start: build
-	docker-compose up -d --scale sidekiq=3
+	docker-compose up -d --scale sidekiq=2
 
 reload:
 	docker-compose restart front
@@ -19,7 +19,7 @@ assets: build
 
 update: assets
 	docker-compose run --rm web rails db:migrate
-	docker-compose up -d --scale sidekiq=3 web streaming sidekiq
+	docker-compose up -d --scale sidekiq=2 web streaming sidekiq
 	make reload
 	docker system prune -af
 
