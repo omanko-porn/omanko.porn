@@ -1,12 +1,5 @@
 version: '3.0'
 services:
-  statsd:
-    image: datadog/docker-dd-agent:latest
-    env_file: .env.datadog
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
   redis:
     image: redis:alpine
     volumes:
