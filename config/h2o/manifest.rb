@@ -54,6 +54,8 @@ class Manifest
       push_paths << @manifest['wave-drawer.png']
     end
 
+    push_paths.compact!
+
     { 'link' => push_paths.map { |path| "<#{path}>; rel=preload; as=#{ASSET_TYPES[File.extname(path)]}" }.join("\n") }
   end
 end
