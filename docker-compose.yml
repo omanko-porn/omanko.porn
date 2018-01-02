@@ -25,7 +25,7 @@ services:
     <<: *mastodon
     command: ./bin/bundle exec sidekiq
   front:
-    image: ykzts/h2o:2.2.3p1
+    image: ykzts/h2o:2.2.4
     ports:
       - "80:80"
       - "443:443"
