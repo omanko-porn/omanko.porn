@@ -12,7 +12,7 @@ start: build
 	docker-compose up -d --scale sidekiq=2
 
 reload:
-	docker-compose restart front
+	docker-compose kill -s HUP front
 
 assets: build
 	docker-compose run --rm web rails assets:precompile
