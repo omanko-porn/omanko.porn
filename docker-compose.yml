@@ -22,9 +22,15 @@ services:
   streaming:
     <<: *mastodon
     command: yarn start
-  sidekiq:
+  sidekiq_default:
     <<: *mastodon
-    command: ./bin/bundle exec sidekiq
+    command: bundle exec sidekiq -c 10 -q default
+  sidekiq_push_and_pull:
+    <<: *mastodon
+    command: bundle exec sidekiq -c 20 -q push -q pull
+  sidekiq_mailers:
+    <<: *mastodon
+    command: bundle exec sidekiq -c 1 -q mailers
   front:
     restart: always
     image: ykzts/h2o:2.2.4

@@ -9,7 +9,7 @@ build: pull
 	docker-compose build
 
 start: build
-	docker-compose up -d --scale sidekiq=2
+	docker-compose up -d
 
 reload:
 	docker-compose kill -s HUP front
@@ -19,7 +19,7 @@ assets: build
 
 update: assets
 	docker-compose run --rm web rails db:migrate
-	docker-compose up -d --scale sidekiq=2 web streaming sidekiq
+	docker-compose up -d web streaming sidekiq_default sidekiq_push_and_pull sidekiq_mailers
 	make reload
 	docker system prune -af
 
