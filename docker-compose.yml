@@ -1,6 +1,7 @@
 version: '3.0'
 services:
   redis:
+    restart: always
     image: redis:alpine
     volumes:
       - ./data/redis:/data
@@ -25,6 +26,7 @@ services:
     <<: *mastodon
     command: ./bin/bundle exec sidekiq
   front:
+    restart: always
     image: ykzts/h2o:2.2.4
     ports:
       - "80:80"
