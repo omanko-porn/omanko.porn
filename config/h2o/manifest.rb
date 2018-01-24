@@ -50,8 +50,6 @@ class Manifest
       push_paths << @manifest['features/compose.js']
       push_paths << @manifest['features/home_timeline.js']
       push_paths << @manifest['features/notifications.js']
-      push_paths << @manifest['mastodon-ui.png']
-      push_paths << @manifest['wave-drawer.png']
     end
 
     push_paths.compact!
