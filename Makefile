@@ -1,4 +1,4 @@
-MASTODON_IMAGE ?= gargron/mastodon:latest
+MASTODON_IMAGE ?= tootsuite/mastodon:edge
 
 all: build
 

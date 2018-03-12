@@ -7,7 +7,7 @@ services:
       - ./data/redis:/data
   web: &mastodon
     restart: always
-    image: ${MASTODON_IMAGE:-gargron/mastodon:latest}
+    image: ${MASTODON_IMAGE:-tootsuite/mastodon:edge}
     env_file: .env.production
     command: ./bin/rails s -p 3000
     depends_on:
@@ -16,7 +16,6 @@ services:
       - storage.omanko.porn:192.168.0.12
     volumes:
       - ./config/mastodon/initializers/deflater.rb:/mastodon/config/initializers/deflater.rb
-      - ./data/mastodon/cache:/mastodon/tmp/cache
       - ./public/assets:/mastodon/public/assets
       - ./public/packs:/mastodon/public/packs
   streaming:
