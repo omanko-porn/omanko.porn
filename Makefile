@@ -15,10 +15,10 @@ reload:
 	docker-compose kill -s HUP front
 
 assets: build
-	docker-compose run --rm web rails assets:precompile
+	docker-compose run --rm web ./bin/rails assets:precompile
 
 update: assets
-	docker-compose run --rm web rails db:migrate
+	docker-compose run --rm web ./bin/rails db:migrate
 	docker-compose up -d web streaming sidekiq_default sidekiq_push_and_pull sidekiq_mailers
 	make reload
 	docker system prune -af

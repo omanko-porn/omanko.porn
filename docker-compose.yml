@@ -9,7 +9,8 @@ services:
     restart: always
     image: ${MASTODON_IMAGE:-tootsuite/mastodon:edge}
     env_file: .env.production
-    command: ./bin/rails s -p 3000 --early-hints
+    # command: ./bin/rails s -p 3000 --early-hints
+    command: ./bin/rails s -p 3000
     depends_on:
       - redis
     extra_hosts:
