@@ -9,8 +9,7 @@ services:
     restart: always
     image: ${MASTODON_IMAGE:-tootsuite/mastodon:edge}
     env_file: .env.production
-    # command: ./bin/rails s -p 3000 --early-hints
-    command: ./bin/rails s -p 3000
+    command: ./bin/rails s -p 3000 --early-hints
     depends_on:
       - redis
     extra_hosts:
@@ -33,7 +32,7 @@ services:
     command: bundle exec sidekiq -c 1 -q mailers
   front:
     restart: always
-    image: ykzts/h2o:2.2.4
+    image: ykzts/h2o:2.2.5
     ports:
       - "80:80"
       - "443:443"
