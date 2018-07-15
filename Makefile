@@ -14,10 +14,7 @@ start: build
 reload:
 	docker-compose kill -s HUP front
 
-assets: build
-	docker-compose run --rm web ./bin/rails assets:precompile
-
-update: assets
+update: build
 	docker-compose run --rm web ./bin/rails db:migrate
 	docker-compose up -d web streaming sidekiq_default sidekiq_push_and_pull sidekiq_mailers
 	make reload
@@ -26,4 +23,4 @@ update: assets
 test:
 	docker-compose run --rm front h2o -c /etc/h2o/h2o.conf -t
 
-.PHONY: all pull build reload assets update test
+.PHONY: all pull build reload update test

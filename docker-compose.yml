@@ -16,8 +16,8 @@ services:
       - storage.omanko.porn:192.168.0.12
     volumes:
       - ./config/mastodon/initializers/deflater.rb:/mastodon/config/initializers/deflater.rb
-      - ./public/assets:/mastodon/public/assets
-      - ./public/packs:/mastodon/public/packs
+      - assets:/mastodon/public/assets
+      - packs:/mastodon/public/packs
   streaming:
     <<: *mastodon
     command: yarn start
@@ -43,3 +43,8 @@ services:
       - ./data/letsencrypt:/etc/letsencrypt:ro
       - ./config/h2o:/etc/h2o:ro
       - ./public:/var/www/html:ro
+      - assets:/var/www/html/assets:ro
+      - packs:/var/www/html/packs:ro
+volumes:
+  assets:
+  packs:
