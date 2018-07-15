@@ -1,8 +1,6 @@
 # directories
 /config/minio/
 /data/
-/public/assets/
-/public/packs/
 /public/system/
 
 # files
