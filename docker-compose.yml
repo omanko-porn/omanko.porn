@@ -43,8 +43,8 @@ services:
       - ./data/letsencrypt:/etc/letsencrypt:ro
       - ./config/h2o:/etc/h2o:ro
       - ./public:/var/www/html:ro
-      - assets:/var/www/html/assets:ro
-      - packs:/var/www/html/packs:ro
+      - assets:/var/www/assets:ro
+      - packs:/var/www/packs:ro
 volumes:
   assets:
   packs:
