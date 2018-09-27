@@ -4,5 +4,6 @@
 /public/system/
 
 # files
-/.env.datadog
+/bin/lego
+/.env.lego
 /.env.production

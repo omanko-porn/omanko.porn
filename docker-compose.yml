@@ -38,6 +38,6 @@ services:
       - web
       - streaming
     volumes:
-      - ./data/letsencrypt:/etc/letsencrypt:ro
+      - ./data/lego:/etc/lego:ro
       - ./config/h2o:/etc/h2o:ro
       - ./public:/var/www/html:ro
