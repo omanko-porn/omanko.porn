@@ -8,5 +8,6 @@ cd $(dirname $0)/..
   --domains omanko.porn \
   --domains *.omanko.porn \
   --email ykzts@desire.sh \
+  --key-type rsa2048 \
   --path $(pwd)/data/lego \
   renew
